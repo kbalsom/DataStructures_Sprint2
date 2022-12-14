@@ -1,9 +1,4 @@
-const {
-  BinarySearchTree,
-  Node,
-  defaultCompare,
-  Compare,
-} = require("./binarySearchTree");
+const { BinarySearchTree, Node, defaultCompare, Compare } = require("./bst");
 
 const BalanceFactor = {
   UNBALANCED_RIGHT: 1,

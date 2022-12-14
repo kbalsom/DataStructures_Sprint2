@@ -2,17 +2,28 @@ const express = require("express");
 const router = express.Router();
 // const actorsDal = require('../services/pg.actors.dal')
 const treesDal = require("../services/trees.dal");
-const avl = require("'../services/avl");
+const { AVLTree } = require("../services/avl");
 
-router.get("/", async (req, res) => {
+router.get("/input", async (req, res) => {
+  try {
+    res.render("input", { title: "Make A Tree" });
+  } catch (error) {
+    console.error(error);
+    res.status(503).render("503");
+  }
+});
+
+router.post("/input/new", async (req, res) => {
   if (DEBUG) console.log("Working?");
   try {
-    //binarysearchtree function
-    const numbers = req.body.numbers;
-    //const tree = results of bst function
-    // await treesDal.addEntry(numbers, tree);
-    // const theTree = tree;
-    res.render("results.ejs", { numbers });
+    const tree = new AVLTree();
+    let numbers = [];
+    numbers = req.body.numbers.split(",");
+    numbers.map((int) => {
+      tree.insert(Number(int));
+    });
+    await treesDal.addEntry(numbers, tree);
+    res.render("results.ejs", { tree });
   } catch {
     console.log("RIGHT HERE");
     res.statusCode = 503;

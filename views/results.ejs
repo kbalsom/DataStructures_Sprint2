@@ -1,0 +1,23 @@
+<html lang="en">
+  <%- include('./partials/header.ejs') %>
+  <body>
+    <!-- Since this page can only be accessed if the user is logged in, we display a Log Out button in our nav -->
+    <%- include('./partials/nav.ejs') %>
+    <div id="results-content">
+      <table id="trees-table">
+        <tr>
+          <th id="description-header" colspan="4">
+            <label>Your Tree</label>
+          </th>
+        </tr>
+        <tr>
+          <th class="category">Tree</th>
+        </tr>
+        <tr>
+          <td><%= tree %></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+  <%- include('./partials/footer.ejs') %>
+</html>
