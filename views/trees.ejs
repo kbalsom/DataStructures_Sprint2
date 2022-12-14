@@ -1,0 +1,20 @@
+<html lang="en">
+  <%- include('./partials/header.ejs') %>
+  <body>
+    <%- include('./partials/nav.ejs') %>
+    <div id="content">
+      <h1>Make A Tree</h1>
+      <h2>Insert a set of comma seperated numbers to create a tree!</h2>
+      <div id="input-form">
+        <form action="/trees" method="POST">
+          <label
+            >Add Numbers:
+            <input type="text" id="numbers" name="numbers" required />
+          </label>
+          <input type="submit" value="Submit" />
+        </form>
+      </div>
+    </div>
+  </body>
+  <%- include('./partials/footer.ejs') %>
+</html>
