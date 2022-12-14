@@ -22,10 +22,10 @@ router.post("/input/new", async (req, res) => {
     numbers.map((int) => {
       tree.insert(Number(int));
     });
-    await treesDal.addEntry(numbers, tree);
+    const stTree = JSON.stringify(tree);
+    treesDal.addEntry(numbers, stTree);
     res.render("results.ejs", { tree });
   } catch {
-    console.log("RIGHT HERE");
     res.statusCode = 503;
     res.render("503");
   }

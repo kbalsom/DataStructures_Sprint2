@@ -16,7 +16,7 @@ async function getAllPrevious() {
 async function addEntry(numbers, tree) {
   if (DEBUG) console.log("Adding input and resulting tree to MongoDB...");
   let newEntry = JSON.parse(
-    `{ "input": "` + numbers + `", "tree": "` + tree + `" }`
+    `{ "input": "` + numbers + `", "tree": ` + tree + ` }`
   );
   try {
     await dal.connect();
