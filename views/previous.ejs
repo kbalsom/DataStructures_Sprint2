@@ -1,0 +1,27 @@
+<html lang="en">
+  <%- include('./partials/head.ejs') %>
+  <body>
+    <%- include('./partials/nav.ejs')%>
+    <div id="results-content">
+      <table id="results-table">
+        <tr>
+          <th id="description-header" colspan="4">
+            <label>All Previous Inputs and Trees</label>
+          </th>
+        </tr>
+        <tr>
+          <th class="category">Input</th>
+          <th class="category">Tree</th>
+        </tr>
+        <% if (previous.length > 0) { %> <% previous.forEach(previous => { %>
+        <tr>
+          <td><%= previous.input %></td>
+          <td style="text-align: center"><%= previous.tree %></td>
+        </tr>
+        <% }) %> <% }
+      </table>
+      <!-- </form> -->
+    </div>
+  </body>
+  <%- include('./partials/foot.ejs') %>
+</html>

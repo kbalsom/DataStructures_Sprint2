@@ -324,7 +324,12 @@ const printNode = (value) => console.log(value);
 const tree1 = new BinarySearchTree();
 
 const tree = new AVLTree(tree1.CompareFn);
-tree.insert(11);
+
+// array(req) (1,2,3,4,5)
+// i for each {
+//   tree insert (i)
+// }
+tree.insert(i);
 tree.insert(7);
 tree.insert(15);
 tree.insert(5);
@@ -338,7 +343,6 @@ tree.insert(12);
 tree.insert(14);
 tree.insert(20);
 tree.insert(18);
-tree.insert(25);
 
 tree.inOrderTraverse(printNode);
 // tree.preOrderTraverse(printNode);
