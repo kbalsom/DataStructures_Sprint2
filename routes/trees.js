@@ -2,38 +2,30 @@ const express = require("express");
 const router = express.Router();
 // const actorsDal = require('../services/pg.actors.dal')
 const treesDal = require("../services/trees.dal");
+const avl = require("'../services/avl");
 
-// router.get("/", async (req, res) => {
-//   try {
-//     let theFilms = await filmsDal.getFilms();
-//     if (DEBUG) console.table(theFilms);
-//     res.render("films", { theFilms });
-//   } catch {
-//     res.statusCode(503).res.render("503");
-//     myEmitter.emit("status", `Status Code: ${res.statusCode}`);
-//   }
-// });
-
-router.post("/", async (req, res) => {
-  if (DEBUG) console.log("ADDING NUMBERS");
-  console.log(req.body);
+router.get("/", async (req, res) => {
+  if (DEBUG) console.log("Working?");
   try {
-    await treesDal.addNumbers(req.body);
-    res.redirect("/results");
+    //binarysearchtree function
+    const numbers = req.body.numbers;
+    //const tree = results of bst function
+    // await treesDal.addEntry(numbers, tree);
+    // const theTree = tree;
+    res.render("results.ejs", { numbers });
   } catch {
-    res.statusCode(503).res.render("503");
-    myEmitter.emit("status", `Status Code: ${res.statusCode}`);
+    console.log("RIGHT HERE");
+    res.statusCode = 503;
+    res.render("503");
   }
 });
 
-router.get("/", async (req, res) => {
+router.get("/previous", async (req, res) => {
   if (DEBUG) console.log(req.query);
+  console.log("Line 25");
   try {
-    let numbers = await treeDal.getAllPrevious(
-      req.query.searchTerm,
-      req.query.database
-    );
-    res.render("results.ejs", { movies }, function (err, html) {
+    let previous = await treeDal.getAllPrevious();
+    res.render("previous.ejs", { previous }, function (err, html) {
       if (err) {
         console.log(err);
         res.render("503");

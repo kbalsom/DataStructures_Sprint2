@@ -14,7 +14,6 @@ app.get("/", (req, res) => {
 });
 
 const treesRouter = require("./routes/trees");
-
 app.use("/trees", treesRouter);
 
 app.use((req, res) => {
