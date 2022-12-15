@@ -1,5 +1,5 @@
 <html lang="en">
-  <%- include('./partials/head.ejs') %>
+  <%- include('./partials/header.ejs') %>
   <body>
     <%- include('./partials/nav.ejs')%>
     <div id="results-content">
@@ -16,12 +16,14 @@
         <% if (previous.length > 0) { %> <% previous.forEach(previous => { %>
         <tr>
           <td><%= previous.input %></td>
-          <td style="text-align: center"><%= previous.tree %></td>
+          <td style="text-align: center">
+            <%= JSON.stringify(previous.tree) %>
+          </td>
         </tr>
-        <% }) %> <% }
+        <% })} %>
       </table>
       <!-- </form> -->
     </div>
   </body>
-  <%- include('./partials/foot.ejs') %>
+  <%- include('./partials/footer.ejs') %>
 </html>

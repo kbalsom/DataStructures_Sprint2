@@ -19,9 +19,9 @@ router.post("/input/new", async (req, res) => {
     const tree = new AVLTree();
     let numbers = [];
     numbers = req.body.numbers.split(",");
-    numbers.map((int) => {
-      tree.insert(Number(int));
-    });
+    for (i = 0; i < numbers.length; i++) {
+      tree.insert(numbers[i]);
+    }
     const stTree = JSON.stringify(tree);
     treesDal.addEntry(numbers, stTree);
     res.render("results.ejs", { tree });
@@ -35,7 +35,7 @@ router.get("/previous", async (req, res) => {
   if (DEBUG) console.log(req.query);
   console.log("Line 25");
   try {
-    let previous = await treeDal.getAllPrevious();
+    let previous = await treesDal.getAllPrevious();
     res.render("previous.ejs", { previous }, function (err, html) {
       if (err) {
         console.log(err);
