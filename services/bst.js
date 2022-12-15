@@ -34,16 +34,13 @@ class BinarySearchTree {
   }
 
   insertNode(node, key) {
-    // if the key is less then, then go insert it to the left.
     if (this.CompareFn(key, node.key) === Compare.LESS_THAN) {
       if (node.left == null) {
-        // To be first child of the root; if the left has nothing there.
         node.left = new Node(key);
       } else {
         this.insertNode(node.left, key);
       }
     } else {
-      // else if the key is greater then, then insert it to the right.
       if (node.right == null) {
         node.right = new Node(key);
       } else {
