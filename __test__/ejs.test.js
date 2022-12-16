@@ -35,7 +35,6 @@ test("previous.ejs is accessible", async () => {
 
 test("results.ejs is accessible", async () => {
   const filePath = "views/results.ejs";
-
   try {
     await fs.promises.access(filePath, fs.constants.R_OK);
     expect(true).toBe(true);

@@ -20,7 +20,8 @@ app.use("/trees", treesRouter);
 app.use((req, res) => {
   res.status(404).render("404");
 });
-
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
   console.log(`Simple app running on port ${PORT}.`);
 });
+
+module.export = server;

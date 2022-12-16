@@ -1,31 +1,59 @@
-const request = require("supertest");
-const server = require("../index.js");
-const app = require("../index.js");
+const { AVLTree } = require("../services/avl");
+const {
+  BinarySearchTree,
+  Node,
+  defaultCompare,
+  Compare,
+} = require("../services/avl");
+const mdb = require("../services/mdb");
 
-describe("Testing Trees Routes", () => {
+describe("Testing Routes", () => {
   beforeAll(async () => {
-    try {
-      await app.locals.dal.connect();
-      global.collection = app.locals.dal.db("algosprint").collection("trees");
-      global.DEBUG = true;
-    } catch (error) {
-      console.error(error);
-    }
+    expect(mdb.connect()).toBeTruthy();
+  });
+  afterAll(() => {
+    mdb.close();
   });
 
-  afterAll(async () => {
-    app.locals.dal.close();
-  });
+  describe("Testing the Functions that was Used From AVLTree Class", () => {
+    test("Tests the inputs of the AVL tree.", () => {
+      const tree = new AVLTree();
+      tree.insert(10);
+      tree.insert(23);
+      tree.insert(35);
+      tree.insert(42);
+      tree.insert(50);
+      expect(tree.root).not.toBe(null);
+      expect(tree.root.key).toBe(23);
+      expect(tree.root.left.key).toBe(10);
+      expect(tree.root.right.key).toBe(42);
+      expect(tree.root.right.left.key).toBe(35);
+      expect(tree.root.right.right.key).toBe(50);
+    });
 
-  test("Responds to /trees/", async () => {
-    const res = await request(app).get("/trees/");
-    expect(res.header["content-type"]).toMatch(/html/);
-    expect(res.statusCode).toEqual(200);
-  });
+    test("Test to see if inputs rotate left.", () => {
+      const tree = new AVLTree();
+      tree.insert(18);
+      tree.insert(25);
+      tree.insert(39);
+      expect(tree.root.key).toBe(25);
+      expect(tree.root.left.key).toBe(18);
+      expect(tree.root.right.key).toBe(39);
+      // console.log(newTree, null, 2);
+    });
 
-  test("Responds to /input", async () => {
-    const res = await request(app).get("/input");
-    expect(res.header["content-type"]).toMatch(/html/);
-    expect(res.statusCode).toBe(200);
+    test("Test to see if inputs rotate left and right.", () => {
+      const tree = new AVLTree();
+      tree.insert(12);
+      tree.insert(27);
+      tree.insert(31);
+      tree.insert(48);
+      tree.insert(54);
+      expect(tree.root.key).toBe(27);
+      expect(tree.root.left.key).toBe(12);
+      expect(tree.root.right.key).toBe(48);
+      expect(tree.root.right.left.key).toBe(31);
+      expect(tree.root.right.right.key).toBe(54);
+    });
   });
 });

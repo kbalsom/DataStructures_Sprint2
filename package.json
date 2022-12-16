@@ -4,7 +4,7 @@
   "description": "Algorithms and Data Structures Sprint",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest --detectOpenHandles"
   },
   "repository": {
     "type": "git",
