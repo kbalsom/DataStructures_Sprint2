@@ -17,7 +17,7 @@ function defaultCompare(a, b) {
     return Compare.EQUALS;
   }
   return a < b ? Compare.LESS_THAN : Compare.BIGGER_THAN;
-}
+} //Make like Kennedy's
 
 class BinarySearchTree {
   constructor(CompareFn = this.defaultCompare) {

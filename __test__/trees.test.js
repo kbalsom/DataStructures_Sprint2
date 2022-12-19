@@ -23,6 +23,7 @@ describe("Testing Routes", () => {
       tree.insert(35);
       tree.insert(42);
       tree.insert(50);
+      
       expect(tree.root).not.toBe(null);
       expect(tree.root.key).toBe(23);
       expect(tree.root.left.key).toBe(10);
@@ -33,12 +34,12 @@ describe("Testing Routes", () => {
 
     test("Test to see if inputs rotate left.", () => {
       const tree = new AVLTree();
-      tree.insert(18);
-      tree.insert(25);
-      tree.insert(39);
-      expect(tree.root.key).toBe(25);
-      expect(tree.root.left.key).toBe(18);
-      expect(tree.root.right.key).toBe(39);
+      tree.insert(5);
+      tree.insert(10);
+      tree.insert(15);
+      expect(tree.root.key).toBe(10);
+      expect(tree.root.left.key).toBe(5);
+      expect(tree.root.right.key).toBe(15);
       // console.log(newTree, null, 2);
     });
 
