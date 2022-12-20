@@ -19,9 +19,9 @@ router.get("/input", async (req, res) => {
 router.post("/input/new", async (req, res) => {
   if (DEBUG) console.log("Making tree...");
   try {
-    const tree = new AVLTree();
-    let numbers = [];
-    numbers = req.body.numbers.split(",");
+    const tree = new AVLTree(); //Call AVLTree function and assign it to constant tree.
+    let numbers = []; //Set up empty array and assign it to numbers.
+    numbers = req.body.numbers.split(","); //Split the request by comma and insert it to the numbers array.
     numbers.map((number) => {
       tree.insert(Number(number));
     });

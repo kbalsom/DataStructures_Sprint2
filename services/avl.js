@@ -144,10 +144,9 @@ class AVLTree extends BinarySearchTree {
       return node;
     }
     // Verify if tree is balanced.
-    const balanceFactor = this.getBalanceFactor(node); // {2}
+    const balanceFactor = this.getBalanceFactor(node);
     if (balanceFactor === BalanceFactor.UNBALANCED_LEFT) {
-      // {3}
-      const balanceFactorLeft = this.getBalanceFactor(node.left); // {4}
+      const balanceFactorLeft = this.getBalanceFactor(node.left);
       if (
         balanceFactorLeft === BalanceFactor.BALANCED ||
         balanceFactorLeft === BalanceFactor.SLIGHTLY_UNBALANCED_LEFT
