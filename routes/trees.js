@@ -1,6 +1,9 @@
-const express = require("express");
-const router = express.Router();
-// const actorsDal = require('../services/pg.actors.dal')
+//Algorithms and Data Structures
+//Written By: Kara Balsom
+//Date Written: Dec 14, 2022
+
+const express = require("express"); //Require express and assign it to the constant express.
+const router = express.Router(); //Set up express router.
 const treesDal = require("../services/trees.dal");
 const { AVLTree } = require("../services/avl");
 
