@@ -4,6 +4,7 @@
 
 const { BinarySearchTree, Node, defaultCompare, Compare } = require("./bst");
 
+//Calculates the balance factor of a node and return its state.
 const BalanceFactor = {
   UNBALANCED_RIGHT: 1,
   SLIGHTLY_UNBALANCED_RIGHT: 2,
@@ -70,16 +71,16 @@ class AVLTree extends BinarySearchTree {
   }
 
   rotationLL(node) {
-    const tmp = node.left; // {1}
-    node.left = tmp.right; // {2}
-    tmp.right = node; // {3}
+    const tmp = node.left;
+    node.left = tmp.right;
+    tmp.right = node;
     return tmp;
   }
 
   rotationRR(node) {
-    const tmp = node.right; // {1}
-    node.right = tmp.left; // {2}
-    tmp.left = node; // {3}
+    const tmp = node.right;
+    node.right = tmp.left;
+    tmp.left = node;
     return tmp;
   }
 
@@ -98,7 +99,7 @@ class AVLTree extends BinarySearchTree {
     this.root = this.insertNode(this.root, key);
   }
   insertNode(node, key) {
-    // insert node as in BST tree
+    // Insert node as in BST tree.
     if (node == null) {
       return new Node(key);
     } else if (this.compareFn(key, node.key) === Compare.LESS_THAN) {
@@ -106,9 +107,10 @@ class AVLTree extends BinarySearchTree {
     } else if (this.compareFn(key, node.key) === Compare.BIGGER_THAN) {
       node.right = this.insertNode(node.right, key);
     } else {
-      return node; // duplicated key
+      return node;
     }
-    // balance the tree if needed
+
+    //Balance the tree if needed.
     const balanceFactor = this.getBalanceFactor(node); // {1}
     if (balanceFactor === BalanceFactor.UNBALANCED_LEFT) {
       // {2}
@@ -135,9 +137,9 @@ class AVLTree extends BinarySearchTree {
   removeNode(node, key) {
     node = super.removeNode(node, key); // {1}
     if (node == null) {
-      return node; // null, no need to balance
+      return node;
     }
-    // verify if tree is balanced
+    // Verify if tree is balanced.
     const balanceFactor = this.getBalanceFactor(node); // {2}
     if (balanceFactor === BalanceFactor.UNBALANCED_LEFT) {
       // {3}
@@ -146,27 +148,22 @@ class AVLTree extends BinarySearchTree {
         balanceFactorLeft === BalanceFactor.BALANCED ||
         balanceFactorLeft === BalanceFactor.SLIGHTLY_UNBALANCED_LEFT
       ) {
-        // {5}
-        return this.rotationLL(node); // {6}
+        return this.rotationLL(node);
       }
       if (balanceFactorLeft === BalanceFactor.SLIGHTLY_UNBALANCED_RIGHT) {
-        // {7}
-        return this.rotationLR(node.left); // {8}
+        return this.rotationLR(node.left);
       }
     }
     if (balanceFactor === BalanceFactor.UNBALANCED_RIGHT) {
-      // {9}
-      const balanceFactorRight = this.getBalanceFactor(node.right); // {10}
+      const balanceFactorRight = this.getBalanceFactor(node.right);
       if (
         balanceFactorRight === BalanceFactor.BALANCED ||
         balanceFactorRight === BalanceFactor.SLIGHTLY_UNBALANCED_RIGHT
       ) {
-        // {11}
-        return this.rotationRR(node); // {12}
+        return this.rotationRR(node);
       }
       if (balanceFactorRight === BalanceFactor.SLIGHTLY_UNBALANCED_LEFT) {
-        // {13}
-        return this.rotationRL(node.right); // {14}
+        return this.rotationRL(node.right);
       }
     }
     return node;
