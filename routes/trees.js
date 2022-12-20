@@ -4,12 +4,12 @@
 
 const express = require("express"); //Require express and assign it to the constant express.
 const router = express.Router(); //Set up express router.
-const treesDal = require("../services/trees.dal");
-const { AVLTree } = require("../services/avl");
+const treesDal = require("../services/trees.dal"); //Require trees.dal.js and assign it to the constant treesDal.
+const { AVLTree } = require("../services/avl"); //Import AVLTree function from avl.js.
 
 router.get("/input", async (req, res) => {
   try {
-    res.render("input", { title: "Make A Tree" });
+    res.render("input", { title: "Make A Tree" }); //Render the input.ejs
   } catch (error) {
     console.error(error);
     res.status(503).render("503");
@@ -17,7 +17,7 @@ router.get("/input", async (req, res) => {
 });
 
 router.post("/input/new", async (req, res) => {
-  if (DEBUG) console.log("Working?");
+  if (DEBUG) console.log("Making tree...");
   try {
     const tree = new AVLTree();
     let numbers = [];
@@ -35,7 +35,7 @@ router.post("/input/new", async (req, res) => {
 });
 
 router.get("/previous", async (req, res) => {
-  if (DEBUG) console.log(req.query);
+  if (DEBUG) console.log("Getting previous inputs and trees...");
   try {
     let previous = await treesDal.getAllPrevious();
     res.render("previous.ejs", { previous }, function (err, html) {
