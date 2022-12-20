@@ -1,3 +1,7 @@
+//Algorithms and Data Structures
+//Written By: Kara Balsom
+//Date Written: Dec 14, 2022
+
 class Node {
   constructor(key) {
     this.key = key;

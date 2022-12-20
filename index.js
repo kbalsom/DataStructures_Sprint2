@@ -1,3 +1,4 @@
+//Algorithms and Data Structures
 //Written By: Kara Balsom
 //Date Written: Dec 13, 2022
 
@@ -24,5 +25,3 @@ app.use((req, res) => {
 const server = app.listen(PORT, () => {
   console.log(`Simple app running on port ${PORT}.`); //Listens on the port 3000 for requests and console logs out the message.
 });
-
-module.export = server;

@@ -1,3 +1,7 @@
+//Algorithms and Data Structures
+//Written By: Kara Balsom
+//Date Written: Dec 14, 2022
+
 const { BinarySearchTree, Node, defaultCompare, Compare } = require("./bst");
 
 const BalanceFactor = {
