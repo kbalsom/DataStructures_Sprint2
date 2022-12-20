@@ -2,24 +2,26 @@
 //Written By: Kara Balsom
 //Date Written: Dec 14, 2022
 
-const { BinarySearchTree, Node, defaultCompare, Compare } = require("./bst");
+const { BinarySearchTree, Node, defaultCompare, Compare } = require("./bst"); //Import functions from bst.js
 
 //Calculates the balance factor of a node and return its state.
 const BalanceFactor = {
-  UNBALANCED_RIGHT: 1,
-  SLIGHTLY_UNBALANCED_RIGHT: 2,
-  BALANCED: 3,
-  SLIGHTLY_UNBALANCED_LEFT: 4,
-  UNBALANCED_LEFT: 5,
+  UNBALANCED_RIGHT: 1, //Right subtree is higher than the left subtree by more than one level.
+  SLIGHTLY_UNBALANCED_RIGHT: 2, //Right subtree is higher than the left subtree by one level.
+  BALANCED: 3, //Left and right subtree have the same height.
+  SLIGHTLY_UNBALANCED_LEFT: 4, //Left subtree is higher than the right subtree by one level.
+  UNBALANCED_LEFT: 5, //Left subtree is higher than the right subtree by more than one level.
 };
 
 class AVLTree extends BinarySearchTree {
+  //Extend BST and set up AVLTree class.
   constructor(compareFn = defaultCompare) {
     super(compareFn);
     this.compareFn = compareFn;
     this.root = null;
   }
 
+  //Function to get the height of a node, passed in as a parameter.
   getNodeHeight(node) {
     if (node == null) {
       return -1;
@@ -30,6 +32,7 @@ class AVLTree extends BinarySearchTree {
     );
   }
 
+  //Function to get the minimum value of a tree.
   min() {
     return this.minNode(this.root);
   }
@@ -41,6 +44,7 @@ class AVLTree extends BinarySearchTree {
     return current;
   }
 
+  //Function to get the maximum value of a tree.
   max() {
     return this.maxNode(this.root);
   }
@@ -53,6 +57,7 @@ class AVLTree extends BinarySearchTree {
     return current;
   }
 
+  //Function to get the balance factor of a tree.
   getBalanceFactor(node) {
     const heightDifference =
       this.getNodeHeight(node.left) - this.getNodeHeight(node.right);
@@ -69,7 +74,7 @@ class AVLTree extends BinarySearchTree {
         return BalanceFactor.BALANCED;
     }
   }
-
+  //Function to perform Left-left rotation (single rotation to the right) on a tree.
   rotationLL(node) {
     const tmp = node.left;
     node.left = tmp.right;
@@ -77,6 +82,7 @@ class AVLTree extends BinarySearchTree {
     return tmp;
   }
 
+  //Function to perform Right-right rotation (single rotation to the left) on a tree.
   rotationRR(node) {
     const tmp = node.right;
     node.right = tmp.left;
@@ -84,22 +90,24 @@ class AVLTree extends BinarySearchTree {
     return tmp;
   }
 
+  //Function to perform Left-right rotation (rotate left then right) on a tree.
   rotationLR(node) {
     node.left = this.rotationRR(node.left);
     return this.rotationLL(node);
   }
 
+  //Function to perform Left-right rotation (rotate right then left) on a tree.
   rotationRL(node) {
     node.right = this.rotationLL(node.right);
     return this.rotationRR(node);
   }
 
-  // Inserting a node in an AVL tree works the same way as in BST.
+  // Function to insert a value into the tree.
   insert(key) {
     this.root = this.insertNode(this.root, key);
   }
+  //Function to insert a node.
   insertNode(node, key) {
-    // Insert node as in BST tree.
     if (node == null) {
       return new Node(key);
     } else if (this.compareFn(key, node.key) === Compare.LESS_THAN) {
@@ -110,30 +118,26 @@ class AVLTree extends BinarySearchTree {
       return node;
     }
 
-    //Balance the tree if needed.
-    const balanceFactor = this.getBalanceFactor(node); // {1}
+    //Function to balance the tree if needed.
+    const balanceFactor = this.getBalanceFactor(node);
     if (balanceFactor === BalanceFactor.UNBALANCED_LEFT) {
-      // {2}
       if (this.compareFn(key, node.left.key) === Compare.LESS_THAN) {
-        // {3}
-        node = this.rotationLL(node); // {4}
+        node = this.rotationLL(node);
       } else {
-        return this.rotationLR(node); // {5}
+        return this.rotationLR(node);
       }
     }
     if (balanceFactor === BalanceFactor.UNBALANCED_RIGHT) {
-      // {6}
       if (this.compareFn(key, node.right.key) === Compare.BIGGER_THAN) {
-        // {7}
-        node = this.rotationRR(node); // {8}
+        node = this.rotationRR(node);
       } else {
-        return this.rotationRL(node); // {9}
+        return this.rotationRL(node);
       }
     }
     return node;
   }
 
-  // Removing a node from the AVL Tree.
+  // Function to remove a node from the tree.
   removeNode(node, key) {
     node = super.removeNode(node, key); // {1}
     if (node == null) {
@@ -170,4 +174,4 @@ class AVLTree extends BinarySearchTree {
   }
 }
 
-module.exports = { AVLTree };
+module.exports = { AVLTree }; //Export AVLTree function.
