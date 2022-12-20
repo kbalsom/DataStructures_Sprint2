@@ -96,7 +96,7 @@ class AVLTree extends BinarySearchTree {
     return this.rotationLL(node);
   }
 
-  //Function to perform Left-right rotation (rotate right then left) on a tree.
+  //Function to perform Right-left rotation (rotate right then left) on a tree.
   rotationRL(node) {
     node.right = this.rotationLL(node.right);
     return this.rotationRR(node);
