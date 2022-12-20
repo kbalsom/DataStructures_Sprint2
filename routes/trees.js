@@ -12,7 +12,7 @@ router.get("/input", async (req, res) => {
     res.render("input", { title: "Make A Tree" }); //Render the input.ejs
   } catch (error) {
     console.error(error);
-    res.status(503).render("503");
+    res.status(503).render("503"); //Render 503.ejs if 503 error is received.
   }
 });
 
@@ -21,34 +21,35 @@ router.post("/input/new", async (req, res) => {
   try {
     const tree = new AVLTree(); //Call AVLTree function and assign it to constant tree.
     let numbers = []; //Set up empty array and assign it to numbers.
-    numbers = req.body.numbers.split(","); //Split the request by comma and insert it to the numbers array.
+    numbers = req.body.numbers.split(","); //Split the request by comma and assign it to numbers.
     numbers.map((number) => {
-      tree.insert(Number(number));
+      tree.insert(Number(number)); //Insert numbers into tree.
     });
-    const stTree = JSON.stringify(tree);
-    treesDal.addEntry(numbers, stTree);
-    res.render("results.ejs", { tree });
+    const stTree = JSON.stringify(tree); //Convert to JSON string.
+    treesDal.addEntry(numbers, stTree); //Use addEntry function to add numbers and stringified tree to MongoDB.
+    res.render("results.ejs", { tree }); //Render results to results.ejs page.
   } catch {
     res.statusCode = 503;
-    res.render("503");
+    res.render("503"); //Render 503.ejs if 503 error is received.
   }
 });
 
 router.get("/previous", async (req, res) => {
   if (DEBUG) console.log("Getting previous inputs and trees...");
   try {
-    let previous = await treesDal.getAllPrevious();
+    let previous = await treesDal.getAllPrevious(); //Use getAllPrevious function to
     res.render("previous.ejs", { previous }, function (err, html) {
+      //Render results on previous.ejs.
       if (err) {
         console.log(err);
-        res.render("503");
+        res.render("503"); //Render 503.ejs if 503 error is received.
       } else {
         res.send(html);
       }
     });
   } catch {
-    res.render("503");
+    res.render("503"); //Render 503.ejs if 503 error is received.
   }
 });
 
-module.exports = router;
+module.exports = router; //Export Router.
