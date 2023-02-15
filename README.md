@@ -1,7 +1,6 @@
-# AlgorithmsSprint2
-
 Written By: Kara Balsom
-Submitted: December 19, 2022
+
+Date Written: December 19, 2022
 
 Algorithms and Data Structures course (Semester 3) - Final Sprint.
 
